@@ -38,6 +38,20 @@ edX and contains no course material.
 Course modules: M1 digital twins · M2 numerical simulation · M3 decision support · M4 machine learning ·
 M5 cybersecurity · M6 grid congestion management.
 
+## Gallery
+
+A few results; click a figure to open its notebook. All 55 figures are in [results/figures](results/figures/README.md), and every figure is also shown inside its notebook on GitHub.
+
+<table>
+<tr><td width="50%"><a href="notebooks/02_numerical_simulation_methods.ipynb"><img src="results/figures/02_numerical_simulation_methods/fig_02.png" alt="02 · ODE solvers: error vs step size (convergence order)"></a><br><sub>02 · ODE solvers: error vs step size (convergence order)</sub></td><td width="50%"><a href="notebooks/03_load_profile_clustering_kmeans.ipynb"><img src="results/figures/03_load_profile_clustering_kmeans/fig_03.png" alt="03 · Customer types found by k-means"></a><br><sub>03 · Customer types found by k-means</sub></td></tr>
+<tr><td width="50%"><a href="notebooks/04_anomaly_detection_autoencoder.ipynb"><img src="results/figures/04_anomaly_detection_autoencoder/fig_02.png" alt="04 · Autoencoder error separates faults and attacks"></a><br><sub>04 · Autoencoder error separates faults and attacks</sub></td><td width="50%"><a href="notebooks/06_forecasting_ensembles_neural.ipynb"><img src="results/figures/06_forecasting_ensembles_neural/fig_03.png" alt="06 · Probabilistic solar forecast (80 % interval)"></a><br><sub>06 · Probabilistic solar forecast (80 % interval)</sub></td></tr>
+<tr><td width="50%"><a href="notebooks/07_dynamic_security_assessment.ipynb"><img src="results/figures/07_dynamic_security_assessment/fig_01.png" alt="07 · Less inertia → deeper frequency dip"></a><br><sub>07 · Less inertia → deeper frequency dip</sub></td><td width="50%"><a href="notebooks/08_cable_overload_prediction.ipynb"><img src="results/figures/08_cable_overload_prediction/fig_02.png" alt="08 · Capstone: the cable and the customers behind it"></a><br><sub>08 · Capstone: the cable and the customers behind it</sub></td></tr>
+<tr><td width="50%"><a href="notebooks/09_optimal_scheduling_milp.ipynb"><img src="results/figures/09_optimal_scheduling_milp/fig_04.png" alt="09 · Unit commitment with a battery"></a><br><sub>09 · Unit commitment with a battery</sub></td><td width="50%"><a href="notebooks/10_surrogate_power_flow.ipynb"><img src="results/figures/10_surrogate_power_flow/fig_01.png" alt="10 · Linear vs neural surrogate on a two-way cable"></a><br><sub>10 · Linear vs neural surrogate on a two-way cable</sub></td></tr>
+<tr><td width="50%"><a href="notebooks/11_mpc_home_energy.ipynb"><img src="results/figures/11_mpc_home_energy/fig_02.png" alt="11 · Rule vs MPC: grid import, battery, EV charging"></a><br><sub>11 · Rule vs MPC: grid import, battery, EV charging</sub></td><td width="50%"><a href="notebooks/13_physics_informed_power_flow.ipynb"><img src="results/figures/13_physics_informed_power_flow/fig_01.png" alt="13 · Physics-informed vs data-only network"></a><br><sub>13 · Physics-informed vs data-only network</sub></td></tr>
+<tr><td width="50%"><a href="notebooks/14_cybersecurity_state_estimation.ipynb"><img src="results/figures/14_cybersecurity_state_estimation/fig_01.png" alt="14 · A stealthy attack the χ² test cannot see"></a><br><sub>14 · A stealthy attack the χ² test cannot see</sub></td><td width="50%"><a href="notebooks/15_congestion_management_flexibility.ipynb"><img src="results/figures/15_congestion_management_flexibility/fig_01.png" alt="15 · Four EV charging strategies checked by AC power flow"></a><br><sub>15 · Four EV charging strategies checked by AC power flow</sub></td></tr>
+<tr><td width="50%"><a href="notebooks/16_digital_twin_building.ipynb"><img src="results/figures/16_digital_twin_building/fig_01.png" alt="16 · Digital twin + Kalman filter estimate a hidden temperature"></a><br><sub>16 · Digital twin + Kalman filter estimate a hidden temperature</sub></td><td width="50%"><a href="notebooks/17_integrated_energy_hub.ipynb"><img src="results/figures/17_integrated_energy_hub/fig_01.png" alt="17 · Energy hub: heat pump, CHP, boiler and heat storage"></a><br><sub>17 · Energy hub: heat pump, CHP, boiler and heat storage</sub></td></tr>
+</table>
+
 ## Quick start
 
 ```bash
@@ -65,6 +79,7 @@ percent format, easy to diff and review):
 .venv/bin/python tools/build_notebooks.py 08_cable_overload_prediction    # or --all
 ```
 
+After a rebuild, `tools/export_figures.py` refreshes the PNGs in `results/figures/`.
 `tools/sync_markdown.py <name>` copies text-only edits into an executed notebook without re-running it (it refuses
 if any code cell changed).
 
@@ -76,7 +91,8 @@ if any code cell changed).
 | `notebooks/py/` | their sources (percent-format Python) |
 | `src/energy_ai/` | shared code: data loaders, power-flow snapshot generator, device selection, plot style |
 | `tools/` | build and inspection scripts |
-| `data/`, `models/`, `results/` | created at run time (not versioned) |
+| `results/figures/` | every notebook figure as PNG (`tools/export_figures.py`) |
+| `data/`, `models/` | created at run time (not versioned) |
 
 ## Data sources
 

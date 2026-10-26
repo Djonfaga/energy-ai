@@ -36,7 +36,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import pandapower as pp
-from energy_ai import simbench_grid, style
+from energy_ai import simbench_grid, plot_grid, style
 style()
 print("pandapower", pp.__version__)
 
@@ -104,10 +104,9 @@ net, prof = simbench_grid("1-LV-rural1--0-sw")
 print(f"{len(net.bus)} buses, {len(net.load)} loads (households), {len(net.sgen)} PV systems, {len(net.line)} cables")
 print("profile shape:", prof[("load", "p_mw")].shape, "→ one year at 15-min resolution")
 
-from pandapower.plotting import simple_plot
-fig, ax = plt.subplots(figsize=(6, 4.5))
-simple_plot(net, ax=ax, show_plot=False, plot_loads=True, plot_sgens=True, bus_size=0.8)
-ax.set_title("SimBench 1-LV-rural1: households (loads) and PV (sgens)"); plt.show()
+fig, ax = plt.subplots(figsize=(7, 5.5))
+plot_grid(net, ax, title="SimBench 1-LV-rural1: customers and PV systems")
+plt.show()
 
 # %% [markdown]
 # ### Time-series power flow: one summer day
