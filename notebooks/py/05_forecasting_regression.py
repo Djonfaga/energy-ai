@@ -42,6 +42,8 @@ print("yearly peak solar output [MW]:", df.solar_mw.resample("YE").max().round(0
 train = df.loc["2017":"2018"]
 test = df.loc["2019"]
 CAP = train.solar_mw.max()          # capacity proxy, used to normalise errors (nRMSE)
+print(f"train: 2017–2018 ({len(train)} hours) | test: 2019 ({len(test)} hours, never used for fitting — every error below "
+      f"is measured on predictions for these hours)")
 
 def scores(y, yhat, name, cap=None):
     r = {"model": name, "RMSE [MW]": np.sqrt(mean_squared_error(y, yhat)), "MAE [MW]": mean_absolute_error(y, yhat), "R²": r2_score(y, yhat)}

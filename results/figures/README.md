@@ -101,6 +101,10 @@ Open the notebook for the code and the explanation around each figure.
 
 ![4. Uncertainty: prediction intervals with quantile regression](06_forecasting_ensembles_neural/fig_03.png)
 
+**Prediction on the unseen test year**
+
+![Prediction on the unseen test year](06_forecasting_ensembles_neural/fig_04.png)
+
 ## [07_dynamic_security_assessment](../../notebooks/07_dynamic_security_assessment.ipynb)
 
 **1. The physics: frequency after losing an infeed**
@@ -133,17 +137,21 @@ Open the notebook for the code and the explanation around each figure.
 
 ![2. Where is the cable, and who is behind it?](08_cable_overload_prediction/fig_02.png)
 
+**Predictions on the unseen test period (October–December)**
+
+![Predictions on the unseen test period (October–December)](08_cable_overload_prediction/fig_03.png)
+
 **5. Did the model discover the grid topology?**
 
-![5. Did the model discover the grid topology?](08_cable_overload_prediction/fig_03.png)
+![5. Did the model discover the grid topology?](08_cable_overload_prediction/fig_04.png)
 
 **6. How many smart meters do we need?**
 
-![6. How many smart meters do we need?](08_cable_overload_prediction/fig_04.png)
+![6. How many smart meters do we need?](08_cable_overload_prediction/fig_05.png)
 
 **7. Beyond yes/no: predicting the loading itself**
 
-![7. Beyond yes/no: predicting the loading itself](08_cable_overload_prediction/fig_05.png)
+![7. Beyond yes/no: predicting the loading itself](08_cable_overload_prediction/fig_06.png)
 
 ## [09_optimal_scheduling_milp](../../notebooks/09_optimal_scheduling_milp.ipynb)
 

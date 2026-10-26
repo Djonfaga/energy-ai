@@ -161,6 +161,29 @@ res = pd.DataFrame(rows).set_index("model")
 display(res.round(3))
 
 # %% [markdown]
+# ### Predictions on the unseen test period (October–December)
+# Every point is a snapshot that no model saw during training. The logistic-regression model predicts *overload yes/no*
+# from the meters alone; the true loading comes from the AC power flow. Colours show whether each prediction was right.
+
+# %%
+p_te = models["logistic regression"].predict_proba(P_te)[:, 1]
+pred_te, true_te = (p_te > 0.5).astype(int), y_te.values
+kind = np.select([(pred_te == 1) & (true_te == 1), (pred_te == 1) & (true_te == 0), (pred_te == 0) & (true_te == 1)],
+                 ["overload, predicted correctly", "false alarm", "missed overload"], "normal, predicted correctly")
+look = {"normal, predicted correctly": ("0.75", 6), "overload, predicted correctly": ("tab:green", 16),
+        "false alarm": ("tab:orange", 26), "missed overload": ("tab:red", 34)}
+L_te = loading[~t_split]
+fig, ax = plt.subplots(1, 2, figsize=(14, 4.2), gridspec_kw={"width_ratios": [2.3, 1]})
+for k, (c, sz) in look.items():
+    m = kind == k
+    ax[0].scatter(L_te.index[m], L_te.values[m], s=sz, color=c, label=f"{k} ({m.sum()})", zorder=3 if k != list(look)[0] else 1)
+ax[0].axhline(100, color="k", ls="--", lw=0.8)
+ax[0].set(ylabel=f"true {LINE} loading [%] (AC power flow)", title="Test period: prediction vs truth for every snapshot")
+ax[0].legend(fontsize=8, loc="upper left")
+ConfusionMatrixDisplay(confusion_matrix(true_te, pred_te), display_labels=["ok", "overload"]).plot(ax=ax[1], colorbar=False)
+ax[1].set_title("Logistic regression on the test set"); plt.tight_layout(); plt.show()
+
+# %% [markdown]
 # **Reading the table**
 # * With the topology known, a one-line physics rule is almost perfect: the cable current *is* the net demand behind it.
 # * Without topology, **logistic regression** is the best learner. The trees have a high ROC-AUC (they *rank* the cases

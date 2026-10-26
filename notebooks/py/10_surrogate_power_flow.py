@@ -37,6 +37,8 @@ X, Y = xy(d)
 vcols, lcols = list(d["vm"].columns), list(d["line_loading"].columns)
 X_tr, X_te, Y_tr, Y_te = train_test_split(X, Y, test_size=0.2, random_state=0)
 print(f"{len(X)} power-flow results | {X.shape[1]} inputs | {len(vcols)} bus voltages + {len(lcols)} line loadings = {Y.shape[1]} outputs")
+print(f"train: {len(X_tr)} power flows | test: {len(X_te)} held-out power flows; every error below compares the surrogate's "
+      f"predictions with the exact power flow on cases it never saw")
 
 # %% [markdown]
 # ## 1. Baseline: a linear surrogate (≈ linearised power flow)

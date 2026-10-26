@@ -20,7 +20,7 @@ edX and contains no course material.
 | 01 | [power_flow_basics](notebooks/01_power_flow_basics.ipynb) | 1 · simulation | AC power flow (pandapower), SimBench, time series | M2 | a 4-house feeder hits its voltage limit at ≈ 80 kW, its thermal limit at ≈ 89 kW; PV back-feed causes the highest loading |
 | 02 | [numerical_simulation_methods](notebooks/02_numerical_simulation_methods.ipynb) | 1 · simulation | Euler / RK4 / implicit ODE solvers, stiffness, Newton–Raphson vs Gauss–Seidel, AC vs DC, co-simulation | M2 | stiff frequency dynamics: RK45 needs 3 025 steps, BDF 169 |
 | 03 | [load_profile_clustering_kmeans](notebooks/03_load_profile_clustering_kmeans.ipynb) | 2 · descriptive | k-means, silhouette, profile features | M4 | shops & services use 33 % of the energy but cause 50 % of the system peak |
-| 04 | [anomaly_detection_autoencoder](notebooks/04_anomaly_detection_autoencoder.ipynb) | 2 · descriptive | autoencoder (GPU), PCA, isolation forest | M4 / M5 | autoencoder flags 87 % of false-data injections at 1.7 % false alarms (AUC 0.94 vs 0.74) |
+| 04 | [anomaly_detection_autoencoder](notebooks/04_anomaly_detection_autoencoder.ipynb) | 2 · descriptive | autoencoder (GPU), PCA, isolation forest | M4 / M5 | autoencoder flags 87 % of false-data injections at 1.5 % false alarms (AUC 0.94 vs 0.74) |
 | 05 | [forecasting_regression](notebooks/05_forecasting_regression.ipynb) | 3 · predictive | linear / polynomial regression, data cleaning, holidays | M4 | load MAPE 6.1 % → 5.0 %, solar nRMSE 9.7 % → 6.2 % |
 | 06 | [forecasting_ensembles_neural](notebooks/06_forecasting_ensembles_neural.ipynb) | 3 · predictive | trees, random forest, boosting, SVR, MLP, stacking, meta-NN, quantile regression | M4 | day-ahead load MAPE 3.45 %; meta-network ensemble as used by National Grid ESO |
 | 07 | [dynamic_security_assessment](notebooks/07_dynamic_security_assessment.ipynb) | 3 · predictive | frequency dynamics, decision trees, cost-sensitive classification | M4 | the tree rediscovers the RoCoF limit E_kin ≥ 50·P_loss; zero missed alarms at threshold 0.1 |
@@ -37,6 +37,27 @@ edX and contains no course material.
 
 Course modules: M1 digital twins · M2 numerical simulation · M3 decision support · M4 machine learning ·
 M5 cybersecurity · M6 grid congestion management.
+
+## How every model is validated
+
+Each model is fitted on one part of the data and then **predicts a separate part it has never seen**; every score in the
+notebooks and in the table above is measured on those predictions. Anything that evolves in time is split
+chronologically: train on the past, predict the future.
+
+| Notebook | Trained on | Predicts (unseen) |
+|---|---|---|
+| 04 anomaly detection | 2 800 normal snapshots | 600 normal + 600 anomalous snapshots |
+| 05, 06 forecasting | 2017–2018 | every hour of 2019 |
+| 07 security assessment | 4 200 operating points | 1 800 other operating points |
+| 08 capstone | January–September | October–December |
+| 10 surrogate | 6 400 power flows | 1 600 others, the full year and two new scenarios |
+| 12 imitation / RL | March–August 2019 | September 2019 |
+| 13 PINN | 3 000 cases | 1 000 other cases + a PV × 3 scenario |
+| 14 cyber detection | days 1–30 (thresholds on days 31–40) | days 41–60 |
+| 16 digital twin | 8–21 January | 22 January – 4 February |
+
+The notebooks show these predictions against the truth, for example the 2019 demand forecasts (06) and every
+October–December snapshot of the capstone (08).
 
 ## Gallery
 

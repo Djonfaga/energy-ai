@@ -124,6 +124,8 @@ display(ops.head().round(3))
 features = ["load_mw", "renewable_share", "H_s", "kinetic_energy_gws", "largest_loss_mw", "primary_reserve_mw", "ffr_mw"]
 X, y = ops[features], ops.secure
 X_tr, X_te, y_tr, y_te = train_test_split(X, y, test_size=0.3, random_state=0, stratify=y)
+print(f"train: {len(X_tr)} operating points | test: {len(X_te)} operating points the models never see "
+      f"(stratified, {1 - y_te.mean():.0%} insecure); all scores below are predictions on the test set")
 tree = DecisionTreeClassifier(max_depth=3, min_samples_leaf=40, random_state=0).fit(X_tr, y_tr)
 print(export_text(tree, feature_names=features, decimals=2))
 fig, ax = plt.subplots(figsize=(16, 6))

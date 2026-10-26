@@ -223,6 +223,24 @@ print(f"day-ahead demand forecast 2019: gradient boosting MAPE = {mape(teL.load_
       f"(seasonal naive {mape(teL.load_mw.values, df.load_mw.shift(168).loc[teL.index].values):.2f} %)")
 
 # %% [markdown]
+# ### Prediction on the unseen test year
+# The model was trained on 2017–2018 only. Below: its day-ahead forecasts for two weeks of 2019 against what really
+# happened, and the error month by month over the whole test year.
+
+# %%
+pred = pd.Series(pL, index=teL.index)
+naive = df.load_mw.shift(168).loc[teL.index]
+fig, ax = plt.subplots(1, 2, figsize=(14, 3.8), sharey=True)
+for a, (s, e) in zip(ax, (("2019-01-21", "2019-01-27"), ("2019-07-15", "2019-07-21"))):
+    a.plot(teL.load_mw.loc[s:e] / 1000, "k", lw=1.8, label="actual")
+    a.plot(pred.loc[s:e] / 1000, color="tab:green", lw=1.3, label="gradient boosting (day-ahead)")
+    a.plot(naive.loc[s:e] / 1000, color="tab:grey", lw=1.0, ls="--", label="seasonal naive")
+    a.set(title=f"Test week starting {s}", ylabel="GB demand [GW]")
+ax[0].legend(fontsize=8); fig.autofmt_xdate(); plt.tight_layout(); plt.show()
+err = (pred - teL.load_mw).abs() / teL.load_mw * 100
+print("2019 MAPE by month [%]:", err.groupby(err.index.month).mean().round(2).to_dict())
+
+# %% [markdown]
 # ## Key takeaways
 # * Non-linear models clearly beat linear regression on solar (≈4 % vs ≈6 % nRMSE). Random forest and gradient
 #   boosting are the usual strong single models on tabular energy data (here the random forest was best).
