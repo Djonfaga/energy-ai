@@ -1,0 +1,14 @@
+# environment and caches
+.venv/
+__pycache__/
+*.egg-info/
+.ipynb_checkpoints/
+
+# private course notes (not for publication)
+toFollow/
+
+# downloaded and generated data (recreated automatically on first run)
+data/raw/*
+data/processed/*
+models/*
+!**/.gitkeep
