@@ -125,6 +125,13 @@ All are open and downloaded automatically; please check each provider's licence 
 - [SimBench](https://simbench.de): German benchmark distribution grids with yearly 15-minute profiles (via the `simbench` package).
 - IEEE 14-bus test system (via `pandapower.networks`).
 
+## Next steps
+
+Phase 2 is planned in [NEXT_STEPS.md](NEXT_STEPS.md): a **forecast-to-value engine** (probabilistic wind, solar and
+price forecasts judged by the money they earn, benchmarked on the HEFTCom2024 competition data) and a **mini-grid AI
+planner for Mali** (solar resource, demand estimation, cost-optimal sizing, LCOE and tariff gap, forecast-driven
+dispatch). The plan is based on the IEA, IRENA and US DOE reviews of AI for energy, current benchmarks and open tools.
+
 ## Licence
 
 Code: MIT (see `LICENSE`).
